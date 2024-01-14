@@ -9,7 +9,7 @@ apple1='he said, "my name is apple"'
 print(apple)
 print(apple1)
 
-a=len(apple)  #finding the length of string
+a=len(apple)                                  #finding the length of string
 print(a)
 
 
@@ -19,7 +19,7 @@ for char in name:
 
 print(name[0:4])
 print(name[-4:])
-### Methods in string
+                                                ### Methods in string
 
 a="my name is sami"
 a=a.upper()
@@ -37,5 +37,3 @@ print(a.isspace())
 
 
 
-for k in range(0,5):
- print(k ,end=",")
