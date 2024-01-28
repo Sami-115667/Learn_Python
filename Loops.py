@@ -1,5 +1,5 @@
 
-
+# for loop use
 
 for k in range(0,5):
  print(k ,end=",")
@@ -23,7 +23,7 @@ print()
 
 
 
-
+#While loop use
 
 i=5
 while(i>=0):
