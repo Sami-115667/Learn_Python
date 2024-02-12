@@ -1,0 +1,1 @@
+SOCK_DGRAM
