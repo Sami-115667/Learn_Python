@@ -4,7 +4,7 @@ import struct
 def main():
     # Create a UDP socket
     socket_server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    socket_server.bind(('localhost', 7000))
+    socket_server.bind(('10.42.0.74', 7000))
 
     # Receive message from Local DNS Server
     receive_data, address = socket_server.recvfrom(1024)
@@ -20,7 +20,7 @@ def main():
     buffer = struct.pack('!HBBI', 1, 2, 2, message_length) + message_bytes
 
     print("Sending to Local DNS:", IP)
-    socket_server.sendto(buffer, ('localhost', 5000))
+    socket_server.sendto(buffer, ('10.42.0.74', 5000))
 
     socket_server.close()
 

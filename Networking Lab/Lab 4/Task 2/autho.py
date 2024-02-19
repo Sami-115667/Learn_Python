@@ -4,7 +4,7 @@ import struct
 def main():
     # Create a UDP socket
     socket_server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    socket_server.bind(('localhost', 9000))
+    socket_server.bind(('10.42.0.74', 9000))
 
     while True:
         # Receive message from Local DNS Server
@@ -15,7 +15,7 @@ def main():
 
         # Send message from Local DNS Server
         IP = "1.0.2.1"
-        send_message(socket_server, ('localhost', 5000), IP)
+        send_message(socket_server, ('10.42.0.74', 5000), IP)
 
     socket_server.close()
 

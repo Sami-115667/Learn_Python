@@ -5,7 +5,7 @@ import struct
 def main():
     # Create a UDP socket
     socket_server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    socket_server.bind(('localhost', 5000))
+    socket_server.bind(('10.42.0.74', 5000))
 
     while True:
         # Receive message from client
@@ -15,29 +15,29 @@ def main():
         print("Received from client:", domain)
 
         # Send message to Root DNS Server
-        root_dns_address = ('localhost', 7000)
-        send_message(socket_server, root_dns_address, "0.0.0.0")
+        root_dns_address = ('10.42.0.74', 7000)
+        send_message(socket_server, root_dns_address, domain)
 
         # Receive message from Root DNS Server
         root_dns_response = receive_message(socket_server)
 
         # Send message to TLD DNS Server
-        tld_dns_address = ('localhost', 9876)
+        tld_dns_address = ('10.42.0.74', 9876)
         send_message(socket_server, tld_dns_address, "0.0.0.1")
 
         # Receive message from TLD DNS Server
         tld_dns_response = receive_message(socket_server)
 
         # Send message to Authoritative DNS Server
-        auth_dns_address = ('localhost', 9000)
+        auth_dns_address = ('10.42.0.74', 9000)
         send_message(socket_server, auth_dns_address, "0.0.1.0")
 
         # Receive message from Authoritative DNS Server
         auth_dns_response = receive_message(socket_server)
 
         # Send message back to client
-        client_address = (address[0], 1234)
-        send_message(socket_server, client_address, "0.0.1.0")
+        #client_address = (address[0], 5000)
+        send_message(socket_server, address, "0.0.1.0")
 
     socket_server.close()
 
