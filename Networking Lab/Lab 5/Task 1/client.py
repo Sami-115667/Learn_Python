@@ -41,6 +41,7 @@ def main():
         # Receiving acknowledgment from the server
         ack_header = client_socket.recv(12)
         ack_num = from_header(ack_header)[1]
+        print("The ack number :",ack_num)
 
         # Updating sequence number and expected acknowledgment number
         seq_num += send_size

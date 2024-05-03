@@ -1,0 +1,42 @@
+import socket
+import pickle
+import time
+
+MAX = float('inf')
+
+def print_2D_array(arr):
+    for row in arr:
+        for element in row:
+            if element == MAX:
+                print("∞ ", end="")
+            else:
+                print(element, end=" ")
+        print()
+    print()
+
+if __name__ == "__main__":
+    port = 5000
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind(('localhost', port))
+
+    while True:  
+        buffer = bytearray(1024)
+        packet, addr = s.recvfrom_into(buffer)
+
+        array = pickle.loads(buffer)
+
+        print_2D_array(array)
+
+        time.sleep(1)
+
+        packet, addr = s.recvfrom(1024)
+        number = int(packet.decode())
+
+        if number == 1:
+            print("\nSending data from Router 1 -> Router 2 & Router 3\n")
+        elif number == 5:
+            print("Dijkstra running\n")
+        elif number == 0:
+            s.close()
+            break

@@ -10,7 +10,7 @@ def from_header(segment):
     return struct.unpack('!IIbbh', segment)
 
 def duplicate_acks():
-    random_number = random.randint(0, 99)
+    random_number = random.randint(10, 99)
     print(random_number)
     return random_number < 10
 
@@ -70,28 +70,28 @@ def main():
 
         ack_header = client_socket.recv(12)
 
-        estimated_rtt = 0.2
-        alpha = 0.125
-        dev_rtt = 0.2
-        beta = 0.125
+        #estimated_rtt = 0.2
+        #alpha = 0.125
+        #dev_rtt = 0.2
+        #beta = 0.125
 
         rtt_end_time = time.time()
 
         duration = (rtt_end_time - rtt_start_time) * 1000
         sample_rtt = duration
 
-        estimated_rtt = (1 - alpha) * estimated_rtt + alpha * sample_rtt
+       # estimated_rtt = (1 - alpha) * estimated_rtt + alpha * sample_rtt
 
-        dev_rtt = (1 - beta) * dev_rtt + beta * (sample_rtt - estimated_rtt)
+        #dev_rtt = (1 - beta) * dev_rtt + beta * (sample_rtt - estimated_rtt)
 
-        rto = estimated_rtt + 4 * dev_rtt
+        #rto = estimated_rtt + 4 * dev_rtt
 
         print("RTT: {:.3f} ms\n"
-              "Estimated RTT: {:.3f} ms\n"
-              "Dev RTT: {:.3f} ms\n"
-              "RTO: {:.3f} ms\n".format(sample_rtt, estimated_rtt, dev_rtt, rto))
+              .format(sample_rtt))
 
         ack_num = from_header(ack_header)[1]
+
+        print("The cumalitive ack:",ack_num)
 
         seq_num += send_size
         expected_ack_num = ack_num
